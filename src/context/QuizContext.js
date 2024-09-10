@@ -74,8 +74,8 @@ function reducer(state, action) {
     case "tick":
       return {
         ...state,
-        secondsRemaining: state.secondsRemaining - 1,
-        status: state.secondsRemaining === 0 ? "finished" : state.status,
+        secondsRemaining: Number(state.secondsRemaining) - 1,
+        status: Number(state.secondsRemaining) === 0 ? "finished" : state.status,
         highScore: Math.max(state.highScore, state.points),
       };
 
@@ -109,8 +109,7 @@ function QuizProvider({ children }) {
   } = state;
   
   const numQuestions = questions.length;
-  const maxPoints = 10;
-  // const maxPoints = questions.reduce((acc, curr) => acc + curr.points, 0);
+  const maxPoints = questions.reduce((acc, curr) => acc + curr.points, 0);
 
   return (
     <QuizContext.Provider
