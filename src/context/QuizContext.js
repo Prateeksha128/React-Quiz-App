@@ -20,22 +20,22 @@ const intialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case "dataReceived":      
+    case "dataReceived":
       return {
         ...state,
         questions: action.payload.questions,
         status: "ready",
-        secondsRemaining: state.questions.length * SEC_PER_QUESTION,
       };
     case "dataFailed":
       return {
         ...state,
         status: "error",
       };
-    case "start":      
+    case "start":
       return {
         ...state,
         status: "active",
+        secondsRemaining: state.questions.length * SEC_PER_QUESTION,
       };
     case "newAnswer":
       const question = state.questions.at(state.index);
@@ -75,7 +75,8 @@ function reducer(state, action) {
       return {
         ...state,
         secondsRemaining: Number(state.secondsRemaining) - 1,
-        status: Number(state.secondsRemaining) === 0 ? "finished" : state.status,
+        status:
+          Number(state.secondsRemaining) === 0 ? "finished" : state.status,
         highScore: Math.max(state.highScore, state.points),
       };
 
@@ -90,14 +91,13 @@ function QuizProvider({ children }) {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => {
-        console.log( Array.isArray(data));
-        
+        console.log(Array.isArray(data));
+
         dispatch({ type: "dataReceived", payload: data });
       })
       .catch((err) => dispatch({ type: "dataFailed" }));
   }, []);
 
-  
   const {
     questions,
     status,
@@ -107,7 +107,7 @@ function QuizProvider({ children }) {
     highScore,
     secondsRemaining,
   } = state;
-  
+
   const numQuestions = questions.length;
   const maxPoints = questions.reduce((acc, curr) => acc + curr.points, 0);
 
