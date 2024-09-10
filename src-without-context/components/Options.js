@@ -1,6 +1,6 @@
 function Options({ question, dispatch, selectedAnswer }) {
   const hasAnswered = selectedAnswer !== null;
-  console.log(hasAnswered);
+  // console.log(hasAnswered);
 
   return (
     <div className='options'>

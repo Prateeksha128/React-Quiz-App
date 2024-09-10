@@ -91,7 +91,7 @@ function QuizProvider({ children }) {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => {
-        console.log(Array.isArray(data));
+        // console.log(Array.isArray(data));
 
         dispatch({ type: "dataReceived", payload: data });
       })

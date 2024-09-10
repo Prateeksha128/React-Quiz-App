@@ -126,4 +126,3 @@ For questions, feedback, or issues, reach out to me:
 ---
 
 Thank you for exploring the React Quiz App! Enjoy quizzing!
-```
